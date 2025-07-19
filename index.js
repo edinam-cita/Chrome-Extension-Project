@@ -2,12 +2,15 @@ let myLeads = [];
 const inputBtn = document.getElementById("input-btn");
 const inputEl = document.getElementById("input-el");
 const ulEl = document.getElementById("ul-el");
+const deleteBtn = document.getElementById("delete-btn");
 
-inputBtn.addEventListener("click", function () {
-  myLeads.push(inputEl.value);
-  inputEl.value = "";
+//localStorage only support strings
+const leadsFromStorage = JSON.parse(localStorage.getItem("myLeads"));
+
+if (leadsFromStorage) {
+  myLeads = leadsFromStorage;
   renderLeads();
-});
+}
 
 function renderLeads() {
   let listItems = "";
@@ -24,7 +27,22 @@ function renderLeads() {
   ulEl.innerHTML = listItems;
 }
 
-/*Alternative way of doing this: listItems += "<li>" + myLeads[i] + "</li>";
+
+deleteBtn.addEventListener("dblclick", function () {
+  localStorage.clear();
+  myLeads = [];
+  renderLeads();
+});
+
+inputBtn.addEventListener("click", function () {
+  myLeads.push(inputEl.value);
+  inputEl.value = "";
+  localStorage.setItem("myLeads", JSON.stringify(myLeads));
+  renderLeads();
+  console.log(localStorage.getItem("myLeads"));
+});
+
+/*Alternative way of doing the renderLeads(): listItems += "<li>" + myLeads[i] + "</li>";
      /create element 
      set text content
      append to ul/

@@ -18,7 +18,7 @@ button {
   background: #5f9341;
   color: white;
   font-size: bold;
-  border: none;
+  border: 1px solid #5f9341 ;
   padding: 10px 10px;
   width: 110px;
 }
@@ -36,4 +36,9 @@ li {
 
 li a {
   color: inherit;
+}
+
+#delete-btn {
+  background: white;
+  color: #5f9341;
 }
